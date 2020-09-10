@@ -9,3 +9,5 @@ Simple, the software provided by Mettler Toledo doesn't make sense.
 Could we just obtain one data point per minute?
 
 Sure.
+
+The file "MLT_Datalogger.exe" is a binary made by pyinstaller, for Windows.
