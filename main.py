@@ -11,7 +11,7 @@ count = 1
 seq = 1
 save = list(range(1, 60))
 
-print("This is a datalogger for ML-T Precision Balances and Scales (Mettler Toledo).")
+print("This is TermCIC's datalogger for ML-T Precision Balances and Scales (Mettler Toledo).")
 print("Why making this program? Simple, the software provided by Mettler Toledo doesn't make sense.")
 
 # Setting serial port
