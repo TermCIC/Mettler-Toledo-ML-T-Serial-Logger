@@ -56,7 +56,7 @@ print("The current time is: {}/{}/{}/{}/{}/{}".format(year, month, day, hour, mi
 print("Creating csv file...")
 with open(path, 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(["Year", "Month", "Day", "Hour", "Minute", "Count", "Weight"])
+    writer.writerow(["Year", "Month", "Day", "Hour", "Minute", "Count", "Weight (mg)"])
 print("Done!")
 print()
 
@@ -71,7 +71,12 @@ while True:
     print(ca)
     if ca == -1:
         read = max(save)
-        print("The maximum value in 60 points is: {}".format(read))
+        if not read:
+            print("Read value invalid")
+            read = "NA"
+         else:
+            read = float(read[0])
+            print("The maximum value in 60 points is: {}".format(read))
         now = datetime.now()
         year = now.strftime("%Y")
         month = now.strftime("%m")
@@ -82,8 +87,8 @@ while True:
         print("Writing to csv...")
         with open(path, 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow([year, month, day, hour, minute, seq, read])
+            writer.writerow([year, month, day, hour, minute, seq/60, read*1000])
             print("Done!")
     count = count + 1
     seq = seq + 1
-    t.sleep(1)
+    t.sleep(0.999224806)
