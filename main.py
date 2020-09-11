@@ -8,7 +8,7 @@ import csv
 import re
 
 count = 1
-seq = 1
+seq = 0
 save = list(range(1, 60))
 
 print("This is TermCIC's datalogger for ML-T Precision Balances and Scales (Mettler Toledo).")
@@ -56,7 +56,7 @@ print("The current time is: {}/{}/{}/{}/{}/{}".format(year, month, day, hour, mi
 print("Creating csv file...")
 with open(path, 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(["Year", "Month", "Day", "Hour", "Minute", "Count", "Weight (mg)"])
+    writer.writerow(["Year", "Month", "Day", "Hour", "Minute", "Count (min.)", "Weight (mg)"])
 print("Done!")
 print()
 
@@ -71,11 +71,11 @@ while True:
     print(ca)
     if ca == -1:
         read = max(save)
-        if not read:
+        if len(read) == 0:
             print("Read value invalid")
             read = "NA"
-         else:
-            read = float(read[0])
+        else:
+            read = float(read[0])*1000
             print("The maximum value in 60 points is: {}".format(read))
         now = datetime.now()
         year = now.strftime("%Y")
@@ -87,8 +87,8 @@ while True:
         print("Writing to csv...")
         with open(path, 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow([year, month, day, hour, minute, seq/60, read*1000])
+            writer.writerow([year, month, day, hour, minute, seq, read])
             print("Done!")
     count = count + 1
-    seq = seq + 1
-    t.sleep(0.999224806)
+    seq = seq + 0.0174418604651167
+    t.sleep(1)
